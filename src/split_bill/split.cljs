@@ -1,7 +1,7 @@
 (ns split-bill.split
   (:require [cljs.pprint :as pprint]))
 
-(defn- map-vals
+(defn map-vals
   "Return map `m` with function `f` applied to the values.
 
   See discussion: https://dev.clojure.org/jira/browse/CLJ-1959 and
@@ -9,7 +9,7 @@
   [m f]
   (reduce-kv (fn [m k v] (assoc m k (f v))) (empty m) m))
 
-(defn- update-vals
+(defn update-vals
   "Update the values of multiple keys `ks` with function `f`.
 
   See discussion: https://stackoverflow.com/questions/9638271/ and
@@ -17,24 +17,24 @@
   [m ks f]
   (reduce (fn [m k] (update-in m [k] f)) m ks))
 
-(defn- round
+(defn round
   "Round `number` to 2 decimal places.
 
   FIXME returns `##NaN`. Do not use until fixed."
   [number]
   (js/parseFloat (pprint/cl-format nil "%.2f" number)))
 
-(defn- add-percentage
+(defn add-percentage
   "Add `percentage` to `total`."
   [total percentage]
   (+ (* percentage total) total))
 
-(defn- total
+(defn total
   "Return the total for a given `subtotal`, `tax`, and `tip`."
   [subtotal tax tip]
   (-> subtotal (add-percentage tax) (add-percentage tip)))
 
-(defn- cut
+(defn cut
   "Return the portion of the total owed given `orders`."
   [orders subtotal tax tip]
   (* (/ (apply + orders) subtotal)
