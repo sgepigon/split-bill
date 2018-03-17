@@ -49,7 +49,7 @@
 (defn bill
   "Return a map with the calculated the total and what each person owes, `:total`
   and `:owed` respectively."
-  [{:keys [party subtotal tax tip] :as m}]
+  [{:keys [party subtotal tax tip]}]
   {:split party
    :owed (map-vals party #(cut % subtotal tax tip))
    :total (total subtotal tax tip)})
