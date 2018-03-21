@@ -17,13 +17,6 @@
   [m ks f]
   (reduce (fn [m k] (update-in m [k] f)) m ks))
 
-(defn round
-  "Round `number` to 2 decimal places.
-
-  FIXME returns `##NaN`. Do not use until fixed."
-  [number]
-  (js/parseFloat (pprint/cl-format nil "%.2f" number)))
-
 (defn add-percentage
   "Add `percentage` to `total`."
   [total percentage]
